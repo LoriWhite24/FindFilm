@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movie Filter</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+body { 
+	background-size: cover;
+	background-color: black;
+	color: white;
+}
+.btn {
+  background-color: none;
+  border: 2px solid crimson;
+  color: white;
+}
+div.container {
+	background-color: black;
+	color: white;
+}
+div.container-fluid {
+	background-color: black;
+	color: white;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+	
+		<div class="jumbotron jumbotron-fluid bg-transparent text-white">
+			<div class="container-fluid">
+				<h1 class="display-4">Movie Filter</h1>
+				<p class="lead">Request a list of movies to pick from. Fill out the form below!</p>
+			</div>
+		</div>
+		
+		<form action="MovieServlet" method="post">
+		<div class="row">
+        	<div class="col-xs-6 col-sm-4">
+			<p>Rating</p>
+			<input type="checkbox" id="g" name="rating" value="G" onclick="ValidateRatingSelection()">
+			<label for="g">G</label><br>
+			<input type="checkbox" id="pg" name="rating" value="PG" onclick="ValidateRatingSelection()">
+			<label for="pg">PG</label><br>
+			<input type="checkbox" id="pg-13" name="rating" value="PG-13" onclick="ValidateRatingSelection()">
+			<label for="pg-13">PG-13</label><br>
+			<input type="checkbox" id="nc-17" name="rating" value="NC-17" onclick="ValidateRatingSelection()">
+			<label for="nc-17">NC-17</label><br>
+			<input type="checkbox" id="r" name="rating" value="R" onclick="ValidateRatingSelection()">
+			<label for="r">R</label><br>
+			</div>	
+			<div class="col-xs-6">
+			<p>Rental Rate</p>
+			<input type="radio" id="rate1" name="rental-rate" value="0.99" required>
+			<label for="rate1">$0.99</label><br>
+			<input type="radio" id="rate2" name="rental-rate" value="2.99" required>
+			<label for="rate2">$2.99</label><br>
+			<input type="radio" id="rate3" name="rental-rate" value="4.99" required>
+			<label for="rate3">$4.99</label><br>
+            </div>
+		</div>
+			<br><br>
+			<label>Result Size Per Rating</label>&nbsp;&nbsp;
+			<input type="number" id="result-size" name="result-size" min="1" max="20" required>
+			
+			<br><br>
+			<input type="submit" id="search" value="Search" class="btn" disabled>
+			<input type="reset" value="Clear" class="btn">
+		
+		</form>
+	
+		<script type="text/javascript">
+			function ValidateRatingSelection() {
+				var checkboxes = document.getElementsByName("rating");
+				var numChecked = 0;
+				for(var i = 0; i < checkboxes.length; i++) {
+					if(checkboxes[i].checked) 
+						numChecked++;
+				}
+				if(numChecked == 0) {
+					document.getElementById("search").disabled = true;
+				} else {
+					document.getElementById("search").disabled = false;
+				}
+			}
+		</script>
+	
+	</div>
+</body>
+</html>
